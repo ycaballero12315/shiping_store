@@ -2,7 +2,27 @@ import pytest
 from shoping_store import CarritoCompras, DescuentoFijo, DescuentoPorcentaje, Producto, StockInsuficienteError
 
 # 🔴 RED - Tests que fallan inicialmente
-class TestCarritoCompras:
+
+class TestPosrcentaje:
+    
+    def test_aplicar_descuento_porcentaje(self):
+        descuento = DescuentoPorcentaje(15)  # 15% de descuento
+        monto_inicial = 200.0
+        monto_final = descuento.aplicar(monto_inicial)
+        assert monto_final == 170.0  # 200 - 30 (15% de 200)
+    
+    def test_aplicar_descuento_fijo(self):
+        descuento = DescuentoFijo(30)  # $30 de descuento
+        monto_inicial = 100.0
+        monto_final = descuento.aplicar(monto_inicial)
+        assert monto_final == 70.0  # 100 - 30
+    
+    def test_aplicar_descuento_fijo_no_negativo(self):
+        descuento = DescuentoFijo(150)  # $150 de descuento
+        monto_inicial = 100.0
+        monto_final = descuento.aplicar(monto_inicial)
+        assert monto_final == 0.0  # No puede ser negativo
+class TestShopingCar:
     
     def test_carrito_vacio_inicialmente(self):
         carrito = CarritoCompras()

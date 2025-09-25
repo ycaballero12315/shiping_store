@@ -10,14 +10,14 @@ class StockInsuficienteError(Exception):
 class Producto:
     def __init__(self, nombre: str, precio: float,
                   stock: Optional[int] = None):
-        self.name = nombre
-        self.price = precio
+        self.nombre = nombre
+        self.precio = precio
         self.stock = stock
     
     def verificar_stock(self, cantidad: int):
         if self.stock is not None and cantidad > self.stock:
             raise StockInsuficienteError(
-                f"Stock insuficiente para {self.name}")
+                f"Stock insuficiente para {self.nombre}")
 
 
 class DescuentoPorcentaje:
